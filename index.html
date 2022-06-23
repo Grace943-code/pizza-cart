@@ -71,18 +71,24 @@
         },
 
         makePayment() {
-            if(this.paymentAmount >= this.cartTotal() ){
+           if(!this.paymentAmount){
+            this.paymentMessage = 'No amount entered!'
+           
+            }else if (this.paymentAmount >= this.cartTotal()){
                 this.paymentMessage = 'Enjoy your Pizzas'
+                
                 setTimeout(() =>{
                     this.payNow=false;
-                    this.clearCart()
-                }, 1000);
+                    this.clearCart();
+                    this.openCart= false
+                },3000);
                 
             } else{
                 this.paymentMessage = 'Sorry-that is not enough money'
-            }
-
+            
+                }
         },
+        
         clearCart() {
             this.smallTotal = 0.00;
             this.smallQty = 0;
@@ -180,14 +186,14 @@
                         <tr>
                             <td colspan="2">
                                 <div x-show="payNow">
-                                    <div class="message" x-text="paymentMessage">Message goes here</div>
+                                    <div class="message" x-text="paymentMessage"></div>
                                     <div>
                                         <label for="">Payment amount</label>
                                         <input class="input" type="number" placeholder="Payment amount"
                                             x-model="paymentAmount">
                                     </div>
                                     <div>
-                                        <button x-on:click="makePayment, openCart= false" class="btn">Pay</button>
+                                        <button x-on:click="makePayment" class="btn">Pay</button>
                                     </div>
                                     
                                 </div>
@@ -206,31 +212,39 @@
         
         <div id="myDiv" class="pizza-block">
             <div class="pizza pizza-fill1">
-                <div><img align="end" class="small-img" src="pizzaimage.png" alt=""><strong>Small pizza</strong> <br>
-                    <strong>R39.99</strong> <br> <br>
-                    small pizza with 3 toppings 1 meat topping.3 or less other toppings.
-                    <button class="Order btn" x-on:click="smallTotal += 39.99; smallQty +=1 ">
-                        Order</button>
+                
+                <img align="end" class="small-img" src="pizzaimage.png" alt="">
+                <h3>Small pizza</h3>
+                <h4>R39.99</h4>
+                <div>small pizza with 3 toppings 1 meat topping.3 or less other toppings.
+
                 </div>
+                <button class="Order btn" x-on:click="smallTotal +=39.99; smallQty +=1">
+                    Order</button>
+
             </div>
 
             <div class="pizza pizza-fill2">
-                <div><img class="medium-img" src="pizzaimage.png" alt=""><strong>Medium pizza</strong> <br>
-                    <strong>R79.99</strong> <br> <br>
-                    medium margeritha pizza with 3 toppings max. 2 or less meat topping. 3 or less other toppings.
-                </div>
-                <button class="Order btn" x-on:click="mediumTotal += 79.99; mediumQty +=1 ">
-                    Order</button>
+                    <img align="end" class="medium-img" src="pizzaimage.png" alt="">
+                    <h3>Medium pizza</h3>
+                    <h4>R79.99</h4>
+                    <div>
+                        medium margeritha pizza with 3 toppings max. 2 or less meat topping. 3 or less other toppings.
+                    </div>
+                    <button class="Order btn" x-on:click="mediumTotal += 79.99; mediumQty +=1 ">
+                        Order</button>
             </div>
 
             <div class="pizza pizza-fill3">
-                <div><img class="large-img" src="pizzaimage.png" alt=""><strong>Large pizza</strong> <br>
-                    <strong>R168.99</strong> <br> <br>
-                    large margeritha pizza with 3 toppings max. 3 meat toppings max. 3 or less other toppings.medium
-                    margeritha pizza with 3 toppings max. 2 or less meat topping. 3 or less other toppings
-                .</div>
-                <button class="Order btn" x-on:click="largeTotal += 168.99; largeQty +=1 ">
-                    Order</button>
+                    <img align="end" class="large-img" src="pizzaimage.png" alt="">
+                    <h3>Large pizza</h3>
+                    <h4>R168.99</h4>
+                    <div>
+                        large margeritha pizza with 3 toppings max. 3 meat toppings max. 3 or less other toppings.medium
+                        margeritha pizza with 3 toppings max. 2 or less meat topping. 3 or less other toppings.
+                    </div>
+                    <button class="Order btn" x-on:click="largeTotal += 168.99; largeQty +=1 ">
+                        Order</button>
             </div>
                 
         </div>
